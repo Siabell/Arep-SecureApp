@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="app.js"></script>
+    <title>Users</title>
+</head>
+<body onload="app.getUsers()" >
+    <form>
+        <div class="container">
+            <br><br>
+            
+            <h3>Tutorial Arep-Patrones Arquitecturales</h3>
+            
+            <br>
+            <p style="margin-left:3%; margin-right:1%;">
+                Este es un Tutorial para construir un sitio web dinámico 
+                sobre Amazon Web Services: EC2,S3 y RDS. Para esto, <br>
+                Se desplegará un sitio estático usando S3,<br>
+                Se desplegará un formulario dinámico usando EC2, y<br>
+                Se Enlazará el formulario a una base de datos relacional,
+                para almacenar y traer los datos almacenados. 
+            </p>
+            <br>
+            <h5>Base de datos</h5>
+            <br>
+            <p style="margin-left:3%; margin-right:3%;">
+                1. Crear una instancia en RDS. <br>
+                2. Configurar la creacion de la base de datos.<br>
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                - Método de creación -> Standard Create <br>
+                - Engine Options -> MySql <br>
+                - Templates -> Free tier <br>
+                - Settings -> nombre de la instancia  <br>
+                - Credential Settings -> master username / master password <br>
+                - Additional connectivity configuration -> publicly accesible / crear nueva vpc <br>
+                - Additional Configuration -> nombre de la base de datos
+            </p>
+            <p style="margin-left:3%; margin-right:3%;">
+                3. Cambiar las reglas de entrada de la vpc para que se pueda
+                acceder a la base de datos <br>
+                4. Probar la conexión con una herramienta de base de datos<br>
+                5. Crear las tablas e insertar datos<br>
+                
+            </p>
+            <h5>EC2</h5>
+            <br>
+            <p style="margin-left:3%; margin-right:3%;">
+                1. Crear una instancia de EC2<br>
+                2. Cambiar las reglas de entrada de la vpc para poder 
+                acceder desde la EC2 a la base de datos, http y el puerto
+                de la aplicación.<br>
+                3. Conectarse a la instancia con ssh <br>
+                
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                - Instalar java 8 con los comandos
+            </p>
+            <p style="margin-left:7%; margin-right:7%;">
+                sudo yum install java-1.8.0<br>
+                sudo yum install java-1.8.0-openjdk-devel<br>
+                sudo yum remove java-1.7.0-openjdk<br>
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                - Instala maven con los comandos
+            </p>
+            <p style="margin-left:7%; margin-right:7%;">
+                sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo<br>
+                sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo<br>
+                sudo yum install -y apache-maven<br>
+                mvn --version<br>
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                - Cambiar maven con java 8
+            </p>
+            <p style="margin-left:7%; margin-right:7%;">
+                sudo update-alternatives --config java<br>
+                sudo update-alternatives --config javac<br>
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                - Instalar Git
+            </p>
+            <p style="margin-left:7%; margin-right:7%;">
+                sudo yum update -y <br>
+                sudo yum install git -y <br>
+                git version<br>
+            </p>
+            <p style="margin-left:3%; margin-right:3%;">
+                4. Clonar el repositorio de gitHub<br>
+            </p>
+            <h5>S3</h5>
+            <br>
+            <p style="margin-left:3%; margin-right:3%;">
+                1. Crear un bucket<br>
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                - permitir acceso público
+            </p>
+            <p style="margin-left:3%; margin-right:3%;">
+                2. Configurar los archivos para que soliciten las peticiones
+                a la EC2
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                - En js cambiar a la url pública de la EC2.
+            </p>
+            <p style="margin-left:3%; margin-right:3%;">
+                3.Subir los archivos al bucket<br>
+                4.Configurar los cors para permitir acceder a la s3<br>
+            </p>
+            <p style="margin-left:5%; margin-right:5%;">
+                &lt;CORSConfiguration&gt;<br>
+            </p>
+                <p style="margin-left:7%; margin-right:7%;">
+                    &lt;CORSRule&gt;<br>
+                </p>
+                <p style="margin-left:9%; margin-right:9%;">
+                    &lt;AllowedOrigin&gt;*&lt;/AllowedOrigin&gt;<br>
+                    &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;<br>
+                    &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;<br>
+                    &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;<br>
+                    &lt;AllowedMethod&gt;DELETE&lt;/AllowedMethod&gt;<br>
+                    &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;<br>
+                </p>
+            <p style="margin-left:7%; margin-right:7%;">
+                &lt;/CORSRule&gt;<br>
+            </p>
+            <p style="margin-left:5%; margin-right:5%;"> 
+                &lt;/CORSConfiguration&gt;<br>
+            </p>
+            <p style="margin-left:3%; margin-right:3%;">
+                5.En properties/static website hosting
+                referenciar el documento index.html<br>
+                6. Correr el programa en ec2<br>
+                7. Verificar su funcionalidad.
+            </p>
+            <br>
+            
+        </div>
+    </form>
+</body>
+</html>

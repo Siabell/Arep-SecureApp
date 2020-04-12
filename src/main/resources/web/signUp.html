@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="app.js"></script>
+    <title>Sign Up</title>
+</head>
+<body>
+    <form>
+        <div class="container">
+            <br><br>
+            <img src="user2.png" alt="user"><br><br>
+            <h3>Sign Up</h3><br>
+            <output id="email">Email:    </output><br><br>
+            <input id="txt_email" type="text" name="email"><br><br>
+            <output id="UserName">UserName: </output><br><br>
+            <input id="txt_userName" type="text" name="UserName">
+            <br><br><output id="name">Name: </output><br><br>
+            <input id="txt_name" type="text" name="name">
+            <br><br><output id="password">Password: </output><br><br>
+            <input id="txt_password" type="text" name="password">
+            <br><br>
+            <input id="signUp" type="button" onclick="app.registerUser()" value="Sign Up">
+            Go back to <a href="index.html">Log In</a>
+            <br><br>
+
+            
+        </div>
+    </form>
+</body>
+</html>
